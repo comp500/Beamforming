@@ -6,14 +6,19 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BeaconBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
+import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
 import net.minecraft.util.random.RandomGenerator;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class PrismBlockEntity extends BlockEntity implements BeamPathNode.Holder, BeamPathNode.Hoverable {
 	public final BeamPathNode<PrismBlockEntity> node = new BeamPathNode<>(this);
@@ -67,6 +72,16 @@ public class PrismBlockEntity extends BlockEntity implements BeamPathNode.Holder
 							be.node.updateMode();
 						} else if (requiresPathUpdate) {
 							be.node.updateColor();
+						}
+						BlockPos teleportPos = be.node.getFinalDestPos();
+						if (teleportPos != null) {
+							// Make the box actually greater than 0 width/depth
+							mutPos.move(1, 1, 1);
+							// Get entities and teleport them
+							List<Entity> ents = world.getOtherEntities(null, new Box(blockPos, mutPos), EntityPredicates.VALID_ENTITY);
+							for (Entity ent : ents) {
+								ent.teleport(teleportPos.getX(), teleportPos.getY() + 1, teleportPos.getZ());
+							}
 						}
 					}
 					break;

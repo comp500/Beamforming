@@ -252,6 +252,17 @@ public class BeamPathNode<T extends BlockEntity & BeamPathNode.Holder> {
 		return dest;
 	}
 
+	public BlockPos getFinalDestPos() {
+		if (cachedDest != null) {
+			BeamPathNode<?> node = cachedDest;
+			while (node.cachedDest != null) {
+				node = node.cachedDest;
+			}
+			return node.entity.getPos();
+		}
+		return null;
+	}
+
 	public ActionResult activate(ServerPlayerEntity player) {
 		ServerPlayerEntityExt pl = ((ServerPlayerEntityExt)player);
 		BeamPathNode<?> selectedNode = pl.getSelectedBeamNode();
