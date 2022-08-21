@@ -19,7 +19,7 @@ public class BeamPathNode<T extends BlockEntity & BeamPathNode.Holder> {
 	private BlockPos dest;
 	private int destHoverSeed = -1;
 	private boolean connected = false;
-	private final float[] color = new float[] {0f, 0f, 0f};
+	public final float[] color = new float[] {0f, 0f, 0f};
 
 	// Server state (persisted)
 	private final List<BlockPos> sources = new ArrayList<>();
@@ -281,5 +281,9 @@ public class BeamPathNode<T extends BlockEntity & BeamPathNode.Holder> {
 			// TODO: check for loops?
 		}
 		return ActionResult.SUCCESS;
+	}
+
+	public void updateColor() {
+		updatePath();
 	}
 }

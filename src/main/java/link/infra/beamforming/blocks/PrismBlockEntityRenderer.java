@@ -67,13 +67,18 @@ public class PrismBlockEntityRenderer implements BlockEntityRenderer<PrismBlockE
 		matrices.pop();
 
 		if (entity.node.hasPower()) {
+			int r, g, b;
+			r = (int) (entity.node.color[0] * 255f);
+			g = (int) (entity.node.color[1] * 255f);
+			b = (int) (entity.node.color[2] * 255f);
+
 			var cameraVec = berd.camera.getPos().subtract(Vec3d.ofCenter(entity.getPos())).normalize();
-			renderLight(cameraVec, hoverOffset, matrices, vertexConsumers, LightmapTextureManager.MAX_LIGHT_COORDINATE);
+			renderLight(cameraVec, hoverOffset, matrices, vertexConsumers, LightmapTextureManager.MAX_LIGHT_COORDINATE, r, g, b);
 
 			var destPos = entity.node.getDest();
 			if (destPos != null) {
 				var beamVec = destPos.subtract(entity.getPos());
-				renderBeam(beamVec, cameraVec, hoverOffset, matrices, vertexConsumers, LightmapTextureManager.MAX_LIGHT_COORDINATE);
+				renderBeam(beamVec, cameraVec, hoverOffset, matrices, vertexConsumers, LightmapTextureManager.MAX_LIGHT_COORDINATE, r, g, b);
 			}
 		}
 	}
@@ -90,7 +95,7 @@ public class PrismBlockEntityRenderer implements BlockEntityRenderer<PrismBlockE
 		return rotMatrix;
 	}
 
-	private void renderBeam(BlockPos beamVec, Vec3d cameraVec, float hoverOffset, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
+	private void renderBeam(BlockPos beamVec, Vec3d cameraVec, float hoverOffset, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int r, int g, int b) {
 		var len = MathHelper.sqrt(
 			beamVec.getX() * beamVec.getX() +
 				beamVec.getY() * beamVec.getY() +
@@ -115,15 +120,15 @@ public class PrismBlockEntityRenderer implements BlockEntityRenderer<PrismBlockE
 		var vc = vertexConsumers.getBuffer(RenderLayer.getTranslucentMovingBlock());
 		var mat = matrices.peek().getPosition();
 		Sprite sprite = MinecraftClient.getInstance().getSpriteAtlas(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).apply(new Identifier("beamforming:block/beam"));
-		vc.vertex(mat, 0, 0, 0.5f).color(255, 255, 255, 255).uv(sprite.getMinU(), sprite.getMinV()).overlay(OverlayTexture.DEFAULT_UV).light(light).normal(0, 0, 0).next();
-		vc.vertex(mat, 1, 0, 0.5f).color(255, 255, 255, 0).uv(sprite.getMaxU(), sprite.getMinV()).overlay(OverlayTexture.DEFAULT_UV).light(light).normal(0, 0, 0).next();
-		vc.vertex(mat, 1, 1, 0.5f).color(255, 255, 255, 0).uv(sprite.getMaxU(), sprite.getMaxV()).overlay(OverlayTexture.DEFAULT_UV).light(light).normal(0, 0, 0).next();
-		vc.vertex(mat, 0, 1, 0.5f).color(255, 255, 255, 255).uv(sprite.getMinU(), sprite.getMaxV()).overlay(OverlayTexture.DEFAULT_UV).light(light).normal(0, 0, 0).next();
+		vc.vertex(mat, 0, 0, 0.5f).color(r, g, b, 255).uv(sprite.getMinU(), sprite.getMinV()).overlay(OverlayTexture.DEFAULT_UV).light(light).normal(0, 0, 0).next();
+		vc.vertex(mat, 1, 0, 0.5f).color(r, g, b, 30).uv(sprite.getMaxU(), sprite.getMinV()).overlay(OverlayTexture.DEFAULT_UV).light(light).normal(0, 0, 0).next();
+		vc.vertex(mat, 1, 1, 0.5f).color(r, g, b, 30).uv(sprite.getMaxU(), sprite.getMaxV()).overlay(OverlayTexture.DEFAULT_UV).light(light).normal(0, 0, 0).next();
+		vc.vertex(mat, 0, 1, 0.5f).color(r, g, b, 255).uv(sprite.getMinU(), sprite.getMaxV()).overlay(OverlayTexture.DEFAULT_UV).light(light).normal(0, 0, 0).next();
 
 		matrices.pop();
 	}
 
-	private void renderLight(Vec3d cameraVec, float hoverOffset, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
+	private void renderLight(Vec3d cameraVec, float hoverOffset, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int r, int g, int b) {
 		var rightVec = new Vec3d(0, 1, 0).crossProduct(cameraVec).normalize();
 		var upVec = cameraVec.crossProduct(rightVec).normalize();
 		var rot = rotationFromBasis(new Vec3f(rightVec), new Vec3f(upVec), new Vec3f(cameraVec));
@@ -138,10 +143,10 @@ public class PrismBlockEntityRenderer implements BlockEntityRenderer<PrismBlockE
 		Sprite spriteEnd = MinecraftClient.getInstance().getSpriteAtlas(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).apply(new Identifier("beamforming:block/beam_end"));
 		var vc = vertexConsumers.getBuffer(RenderLayer.getTranslucentMovingBlock());
 		var mat = matrices.peek().getPosition();
-		vc.vertex(mat, 0, 0, 0.1f).color(255, 255, 255, 255).uv(spriteEnd.getMinU(), spriteEnd.getMinV()).light(light).normal(0, 0, 0).next();
-		vc.vertex(mat, 1, 0, 0.1f).color(255, 255, 255, 255).uv(spriteEnd.getMaxU(), spriteEnd.getMinV()).light(light).normal(0, 0, 0).next();
-		vc.vertex(mat, 1, 1, 0.1f).color(255, 255, 255, 255).uv(spriteEnd.getMaxU(), spriteEnd.getMaxV()).light(light).normal(0, 0, 0).next();
-		vc.vertex(mat, 0, 1, 0.1f).color(255, 255, 255, 255).uv(spriteEnd.getMinU(), spriteEnd.getMaxV()).light(light).normal(0, 0, 0).next();
+		vc.vertex(mat, 0, 0, 0.1f).color(r, g, b, 255).uv(spriteEnd.getMinU(), spriteEnd.getMinV()).light(light).normal(0, 0, 0).next();
+		vc.vertex(mat, 1, 0, 0.1f).color(r, g, b, 255).uv(spriteEnd.getMaxU(), spriteEnd.getMinV()).light(light).normal(0, 0, 0).next();
+		vc.vertex(mat, 1, 1, 0.1f).color(r, g, b, 255).uv(spriteEnd.getMaxU(), spriteEnd.getMaxV()).light(light).normal(0, 0, 0).next();
+		vc.vertex(mat, 0, 1, 0.1f).color(r, g, b, 255).uv(spriteEnd.getMinU(), spriteEnd.getMaxV()).light(light).normal(0, 0, 0).next();
 
 		matrices.pop();
 	}
