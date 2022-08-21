@@ -94,7 +94,7 @@ jar {
 		rename { "${it}_${archivesBaseName}" }
 	}
 
-	dependsOn 'runDatagen'
+	dependsOn 'runDatagenClient'
 }
 
 // Configure the maven publication
