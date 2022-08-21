@@ -1,0 +1,16 @@
+{
+	"required": true,
+	"minVersion": "0.8",
+	"package": "link.infra.beamforming.mixin",
+	"compatibilityLevel": "JAVA_17",
+	"mixins": [
+		"ServerPlayerEntityMixin"
+	],
+	"client": [
+		"GameRendererAccessor",
+		"Matrix4fMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

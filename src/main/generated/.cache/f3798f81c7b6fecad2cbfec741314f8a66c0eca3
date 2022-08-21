@@ -1,4 +1,4 @@
-// 1.19.2	2022-08-16T00:14:03.4685714	Models
-aa58ba8c5aa4c8c22a346ad3fa092c4e824e0b41 assets\superposition\models\block\prism.json
-b163c6b628e9528ea163b9ed63ed2a2fa12dcd04 assets\superposition\models\item\prism.json
-1ae56f5e669aee92836fabb2180e6629c97df0f1 assets\superposition\blockstates\prism.json
+// 1.19.2	2022-08-21T23:31:44.0068377	Models
+2ffd8cb4676a8d4448ecde559b0bed4708d9a1a8 assets\beamforming\models\block\prism.json
+544d6677c46997f512c58524b8070fecf2bdd5ba assets\beamforming\blockstates\prism.json
+c7d0961a92d4e8171854ef508869400753964bef assets\beamforming\models\item\prism.json

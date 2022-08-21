@@ -1,7 +1,0 @@
-{
-	"block.superposition.prism": "Prism",
-	"block.superposition.prism.binding": "Select another prism to bind it",
-	"block.superposition.prism.recursion": "Cannot bind prism to itself",
-	"block.superposition.prism.bound": "Successfully bound!",
-	"block.superposition.prism.incompatible": "Binding failed: Incompatible endpoint types"
-}

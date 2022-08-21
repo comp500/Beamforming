@@ -2,27 +2,27 @@
 	"schema_version": 1,
 	"quilt_loader": {
 		"group": "link.infra",
-		"id": "superposition",
+		"id": "beamforming",
 		"version": "${version}",
 		"metadata": {
-			"name": "Superposition",
-			"description": "Quantum transportation",
+			"name": "Beamforming",
+			"description": "Light-based transportation",
 			"contributors": {
 				"comp500": "Owner"
 			},
 			"contact": {
-				"homepage": "https://example.com/",
-				"issues": "https://github.com/QuiltMC/quilt-template-mod/issues",
-				"sources": "https://github.com/QuiltMC/quilt-template-mod"
+				"homepage": "https://modrinth.com/mod/beamforming",
+				"issues": "https://github.com/comp500/Beamforming/issues",
+				"sources": "https://github.com/comp500/Beamforming"
 			},
-			"icon": "assets/superposition/icon.png"
+			"icon": "assets/beamforming/icon.png"
 		},
 		"intermediate_mappings": "net.fabricmc:intermediary",
 		"entrypoints": {
-			"init": "link.infra.superposition.Superposition",
-			"client_init": "link.infra.superposition.SuperpositionClient",
-			"fabric-datagen": "link.infra.superposition.SuperpositionDatagen",
-			"pre_launch": "link.infra.superposition.SuperpositionPrelaunch"
+			"init": "link.infra.beamforming.Beamforming",
+			"client_init": "link.infra.beamforming.BeamformingClient",
+			"fabric-datagen": "link.infra.beamforming.BeamformingDatagen",
+			"pre_launch": "link.infra.beamforming.BeamformingPrelaunch"
 		},
 		"depends": [
 			{
@@ -39,5 +39,5 @@
 			}
 		]
 	},
-	"mixin": "superposition.mixins.json"
+	"mixin": "beamforming.mixins.json"
 }

@@ -1,0 +1,7 @@
+{
+	"block.beamforming.prism": "Prism",
+	"block.beamforming.prism.binding": "Select another prism to bind it",
+	"block.beamforming.prism.recursion": "Cannot bind prism to itself",
+	"block.beamforming.prism.bound": "Successfully bound!",
+	"block.beamforming.prism.incompatible": "Binding failed: Incompatible endpoint types"
+}
