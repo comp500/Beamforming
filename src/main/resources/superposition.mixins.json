@@ -1,0 +1,17 @@
+{
+	"required": true,
+	"minVersion": "0.8",
+	"package": "link.infra.superposition.mixin",
+	"compatibilityLevel": "JAVA_17",
+	"mixins": [
+		"Matrix4fMixin",
+		"ServerPlayerEntityMixin"
+	],
+	"client": [
+		"BeaconBlockEntityMixin",
+		"GameRendererAccessor"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}
