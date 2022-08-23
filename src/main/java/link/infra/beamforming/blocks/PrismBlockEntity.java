@@ -80,7 +80,7 @@ public class PrismBlockEntity extends BlockEntity implements BeamPathNode.Holder
 							// Get entities and teleport them
 							List<Entity> ents = world.getOtherEntities(null, new Box(blockPos, mutPos), EntityPredicates.VALID_ENTITY);
 							for (Entity ent : ents) {
-								ent.teleport(teleportPos.getX(), teleportPos.getY() + 1, teleportPos.getZ());
+								ent.teleport(teleportPos.getX() + 0.5, teleportPos.getY() + 1, teleportPos.getZ() + 0.5);
 							}
 						}
 					}
