@@ -21,8 +21,7 @@
 		"entrypoints": {
 			"init": "link.infra.beamforming.Beamforming",
 			"client_init": "link.infra.beamforming.BeamformingClient",
-			"fabric-datagen": "link.infra.beamforming.BeamformingDatagen",
-			"pre_launch": "link.infra.beamforming.BeamformingPrelaunch"
+			"fabric-datagen": "link.infra.beamforming.BeamformingDatagen"
 		},
 		"depends": [
 			{
