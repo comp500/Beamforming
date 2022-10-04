@@ -264,6 +264,9 @@ public class BeamPathNode<T extends BlockEntity & BeamPathNode.Holder> {
 	}
 
 	public ActionResult activate(ServerPlayerEntity player) {
+		if (!player.getAbilities().allowModifyWorld) {
+			return ActionResult.FAIL;
+		}
 		ServerPlayerEntityExt pl = ((ServerPlayerEntityExt)player);
 		BeamPathNode<?> selectedNode = pl.getSelectedBeamNode();
 		if (selectedNode == null) {
